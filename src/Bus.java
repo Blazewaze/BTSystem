@@ -24,13 +24,29 @@ public class Bus {
         this("RWP","NULL");
     }
 
+    public void printBuses(ArrayList<Bus> buses,ArrayList<Driver> drivers){
+       try {
+           for (Bus i : buses) {
+
+                   System.out.println("Bus Number Plate: " + i.NoPlate);
+                   System.out.println("Bus Travelling From: " + i.TravellingFrom);
+                   System.out.println("Bus Travelling To: " + i.TravellingTo);
+
+           }
+       }catch(Exception exp){
+           System.out.println("No Buses Exsits");
+       }
+
+
+    }
+
     public void addBus(){
 
         if(Driver.DriverCount > 0) {
             System.out.println("Where will bus Travel to");
-            String TravelTo = sc.nextLine();
+            this.TravellingTo = sc.nextLine();
             System.out.println("Where will bus Travel From");
-            String TravelFrom = sc.nextLine();
+            this.TravellingFrom = sc.nextLine();
 
             System.out.println("What City bus is this Type in 3 letters");
             String city;
