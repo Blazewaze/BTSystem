@@ -6,13 +6,13 @@ public class Driver {
     private double rating;
     private String cnic;
     public  ArrayList<Bus> busesAssigned = new ArrayList<>();
-    static int DriverCount = 1;
+
 
     Driver(String name, double rating , String cnic){
         this.name = name;
         this.rating = rating;
         this.cnic = cnic;
-        DriverCount++;
+
     }
 
     public void setName(String name){
@@ -47,9 +47,9 @@ public class Driver {
 
     }
 
-    public boolean driverFind(Driver drivers,String name){
-        for(int i =0; i<DriverCount;i++){
-            if(drivers.name.equalsIgnoreCase(name)){
+    public boolean driverFind(ArrayList<Driver> drivers, String name){
+        for(Driver i: drivers){
+            if(i.name.equalsIgnoreCase(name)){
                 return true;
             }
         }
