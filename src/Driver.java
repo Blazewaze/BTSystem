@@ -6,13 +6,14 @@ public class Driver {
     private double rating;
     private String cnic;
     public  ArrayList<Bus> busesAssigned = new ArrayList<>();
+    static int DriverCount = 1;
 
 
     Driver(String name, double rating , String cnic){
         this.name = name;
         this.rating = rating;
         this.cnic = cnic;
-
+        ++DriverCount;
     }
 
     public void setName(String name){
