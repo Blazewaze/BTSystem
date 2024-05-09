@@ -5,7 +5,9 @@ public class Ticket {
     private String name;
     private String TravellingTo;
     private String TravellingFrom;
-    private int Cost;
+    private boolean ticketVip = false;
+    private double Cost;
+    private static double PRICE_PER_KM = 40;
 
 
 
@@ -16,20 +18,21 @@ public class Ticket {
         this.TravellingTo = sc.nextLine();
         System.out.println("Travelling from");
         this.TravellingTo = sc.nextLine();
+        System.out.println("Is this Ticket VIP or Not Y for yes N for no");
+        String ch = sc.next();
+        if(ch.equalsIgnoreCase("Y")){
+            this.ticketVip = true;
+        }
+
+        System.out.println("Estimated Distance in KiloMeters");
+        double kms = sc.nextDouble();
+
+        this.Cost = kms*(PRICE_PER_KM);
 
     }
-    private int costCal(){
-        if(this.TravellingFrom.equalsIgnoreCase("Rawalpindi") && this.TravellingTo.equalsIgnoreCase("Karachi")){
-            return  8000;
-        }
-        else if(this.TravellingFrom.equalsIgnoreCase("Rawalpindi") && this.TravellingTo.equalsIgnoreCase("Islamabad")){
-            return  500;
-        }
-        else if(this.TravellingFrom.equalsIgnoreCase("Rawalpindi") && this.TravellingTo.equalsIgnoreCase("Lahore")){
-            return 6000;
-        }
-        return 9000;
-    }
+
+
+
 
 
 }

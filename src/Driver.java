@@ -9,12 +9,6 @@ public class Driver {
 
 
 
-    Driver(String name, double rating , String cnic){
-        this.name = name;
-        this.rating = rating;
-        this.cnic = cnic;
-
-    }
 
     public void setName(String name){
         this.name = name;
@@ -48,7 +42,7 @@ public class Driver {
 
     }
 
-    public boolean driverFind(ArrayList<Driver> drivers, String name){
+    public static boolean driverFind(ArrayList<Driver> drivers, String name){
         for(Driver i: drivers){
             if(i.name.equalsIgnoreCase(name)){
                 return true;

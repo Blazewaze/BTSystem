@@ -12,6 +12,7 @@ public class Bus {
 
 
 
+
     Bus(String TravellingFrom, String TravellingTo){
         this.TravellingFrom = TravellingFrom;
         this.TravellingTo = TravellingTo;
