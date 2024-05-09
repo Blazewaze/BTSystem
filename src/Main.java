@@ -66,7 +66,12 @@ public class Main {
                     if(user_choice_driver == 2){
                         System.out.println("Name of Driver");
                         String name = scanner.nextLine();
-                        Driver.driverFind(drivers,name);
+                        if(Driver.driverFind(drivers,name)){
+                            System.out.println("Driver Exsits");
+                        }
+                        else{
+                            System.out.println("Doesnt Exsits");
+                        }
                     }
             }
 
