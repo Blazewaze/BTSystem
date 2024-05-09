@@ -2,7 +2,7 @@ import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Bus {
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
     private String NoPlate;
     private String TravellingFrom;
@@ -27,10 +27,11 @@ public class Bus {
     public void printBuses(ArrayList<Bus> buses,ArrayList<Driver> drivers){
        try {
            for (Bus i : buses) {
-
+                   System.out.println("-------------------------------------------");
                    System.out.println("Bus Number Plate: " + i.NoPlate);
                    System.out.println("Bus Travelling From: " + i.TravellingFrom);
                    System.out.println("Bus Travelling To: " + i.TravellingTo);
+                   System.out.println("-------------------------------------------");
 
            }
        }catch(Exception exp){
@@ -67,54 +68,59 @@ public class Bus {
         }
 
     }
-    public void assignDriverToBus(ArrayList<Bus> buses , ArrayList<Driver> drivers){
-        try {
-            for (Bus i : buses) {
+    public static void assignDriverToBus(ArrayList<Bus> buses , ArrayList<Driver> drivers){
+        if (!( buses.isEmpty() ) && !( drivers.isEmpty())) {
+            try {
 
-                System.out.println("Please Select From following Buses");
-                System.out.println("No Plate: " + i.NoPlate);
+                for (Bus i : buses) {
 
-            }
-            System.out.println("Write your selection for Number Plate");
-            String user_choice_NoPlate = sc.nextLine();
+                    System.out.println("Please Select From following Buses");
+                    System.out.println("No Plate: " + i.NoPlate);
 
-            for (Driver i : drivers) {
+                }
+                System.out.println("Write your selection for Number Plate");
+                String user_choice_NoPlate = sc.nextLine();
 
-                System.out.println("Please Select From following Drivers");
-                System.out.println("Driver Name: " + i.getName());
+                for (Driver i : drivers) {
 
-            }
-            System.out.println("Write your selection for Driver");
-            String user_choice_DriverName = sc.nextLine();
+                    System.out.println("Please Select From following Drivers");
+                    System.out.println("Driver Name: " + i.getName());
 
-            boolean nameExsits = false;
-            boolean noExists = false;
-            for (Bus i : buses) {
+                }
+                System.out.println("Write your selection for Driver");
+                String user_choice_DriverName = sc.nextLine();
 
-                if(user_choice_NoPlate.equalsIgnoreCase(i.NoPlate));
-                noExists = true;
-                break;
-            }
-            for (Driver i: drivers) {
+                boolean nameExsits = false;
+                boolean noExists = false;
+                for (Bus i : buses) {
 
-                if(user_choice_DriverName.equalsIgnoreCase(i.getName()));
-                nameExsits = true;
-                break;
-            }
+                    if (user_choice_NoPlate.equalsIgnoreCase(i.NoPlate)) ;
+                    noExists = true;
+                    break;
+                }
+                for (Driver i : drivers) {
 
-            if(noExists && nameExsits){
-                for (Driver i: drivers) {
-                    for (Bus j : buses) {
-                        if (user_choice_DriverName.equalsIgnoreCase(i.getName()) && user_choice_NoPlate.equalsIgnoreCase(j.NoPlate))
-                            i.busesAssigned.add(j);
-                        break;
+                    if (user_choice_DriverName.equalsIgnoreCase(i.getName())) ;
+                    nameExsits = true;
+                    break;
+                }
+
+                if (noExists && nameExsits) {
+                    for (Driver i : drivers) {
+                        for (Bus j : buses) {
+                            if (user_choice_DriverName.equalsIgnoreCase(i.getName()) && user_choice_NoPlate.equalsIgnoreCase(j.NoPlate))
+                                i.busesAssigned.add(j);
+                            break;
+                        }
                     }
                 }
-            }
-        }catch(Exception exp){
-            System.out.println("Driver or Bus dont exsits");
-        }
 
+            }catch(Exception exp){
+                System.out.println("Driver or Bus dont exsits");
+            }
+        }else{
+            System.out.println("No Buses Or Drivers Avaliable");
+        }
 
 
 
