@@ -30,7 +30,7 @@ public class Main {
                     int user_ch_ticket = scanner.nextInt();
                   if(user_ch_ticket == 1) {
                       tickets.add(new Ticket());
-                      tickets.get(ticket_count).ticketgenerator();
+                      tickets.get(ticket_count).ticketgenerator(buses);
                       ticket_count++;
                   }
                  break;

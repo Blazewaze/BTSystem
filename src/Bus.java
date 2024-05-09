@@ -11,7 +11,12 @@ public class Bus {
 
 
 
-
+    public String getTravellingFrom(){
+        return this.TravellingFrom;
+    }
+    public String getTravellingTo(){
+        return this.TravellingTo;
+    }
 
     Bus(String TravellingFrom, String TravellingTo){
         this.TravellingFrom = TravellingFrom;
@@ -44,7 +49,7 @@ public class Bus {
 
     public void addBus(){
 
-        if(Driver.busesAssigned.size() > 0) {
+        if(!Driver.busesAssigned.isEmpty()) {
             System.out.println("Where will bus Travel to");
             this.TravellingTo = sc.nextLine();
             System.out.println("Where will bus Travel From");
