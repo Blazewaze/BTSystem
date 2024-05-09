@@ -5,15 +5,15 @@ public class Driver {
     private String name;
     private double rating;
     private String cnic;
-    public  ArrayList<Bus> busesAssigned = new ArrayList<>();
-    static int DriverCount = 1;
+    public static ArrayList<Bus> busesAssigned = new ArrayList<>();
+
 
 
     Driver(String name, double rating , String cnic){
         this.name = name;
         this.rating = rating;
         this.cnic = cnic;
-        ++DriverCount;
+
     }
 
     public void setName(String name){

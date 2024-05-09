@@ -17,7 +17,7 @@ public class Bus {
         this.TravellingTo = TravellingTo;
         this.NoPlate = "AB"+NoPlateAssigner;
 
-        ++NoPlateAssigner;
+        NoPlateAssigner++;
     }
 
     Bus(){
@@ -43,7 +43,7 @@ public class Bus {
 
     public void addBus(){
 
-        if(Driver.DriverCount > 0) {
+        if(Driver.busesAssigned.size() > 0) {
             System.out.println("Where will bus Travel to");
             this.TravellingTo = sc.nextLine();
             System.out.println("Where will bus Travel From");
