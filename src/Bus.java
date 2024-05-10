@@ -1,137 +1,122 @@
-import java.sql.SQLOutput;
-import java.util.Scanner;
 import java.util.ArrayList;
-public class Bus {
+import java.util.Scanner;
+
+class Bus {
     static Scanner sc = new Scanner(System.in);
+    private String noPlate;
+    private String travellingFrom;
+    private String travellingTo;
+    private Driver driver;
+    private boolean driverAssign = false;
+    private static int noPlateAssigner = 101;
 
-    private String NoPlate;
-    private String TravellingFrom;
-    private String TravellingTo;
-    public static int NoPlateAssigner = 101;
-
-
-
-    public String getTravellingFrom(){
-        return this.TravellingFrom;
-    }
-    public String getTravellingTo(){
-        return this.TravellingTo;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
-    Bus(String TravellingFrom, String TravellingTo){
-        this.TravellingFrom = TravellingFrom;
-        this.TravellingTo = TravellingTo;
-        this.NoPlate = "AB"+NoPlateAssigner;
-
-        NoPlateAssigner++;
+    public String getTravellingFrom() {
+        return this.travellingFrom;
     }
 
-    Bus(){
-        this("RWP","NULL");
+    public String getTravellingTo() {
+        return this.travellingTo;
     }
 
-    public void printBuses(ArrayList<Bus> buses,ArrayList<Driver> drivers){
-       try {
-           for (Bus i : buses) {
-                   System.out.println("-------------------------------------------");
-                   System.out.println("Bus Number Plate: " + i.NoPlate);
-                   System.out.println("Bus Travelling From: " + i.TravellingFrom);
-                   System.out.println("Bus Travelling To: " + i.TravellingTo);
-                   System.out.println("-------------------------------------------");
-
-           }
-       }catch(Exception exp){
-           System.out.println("No Buses Exsits");
-       }
-
-
+    Bus(String travellingFrom, String travellingTo) {
+        this.travellingFrom = travellingFrom;
+        this.travellingTo = travellingTo;
+        this.noPlate = "AB" + noPlateAssigner;
+        noPlateAssigner++;
     }
 
-    public void addBus(){
+    Bus() {
+        this("RWP", "NULL");
+    }
 
-        if(!Driver.busesAssigned.isEmpty()) {
+    public void printBuses(ArrayList<Bus> buses, ArrayList<Driver> drivers) {
+        try {
+            for (Bus bus : buses) {
+                System.out.println("-------------------------------------------");
+                System.out.println("Bus Number Plate: " + bus.noPlate);
+                System.out.println("Bus Travelling From: " + bus.travellingFrom);
+                System.out.println("Bus Travelling To: " + bus.travellingTo);
+                System.out.println("Bus Assigned A Driver: " + bus.driverAssign);
+                if (bus.driverAssign) {
+                    System.out.println("Driver's Name: " + bus.driver.getName());
+                    System.out.println("Driver's CNIC: " + bus.driver.getCnic());
+                    System.out.println("Driver's Rating: " + bus.driver.getRating());
+                }
+                System.out.println("-------------------------------------------");
+            }
+        } catch (Exception exp) {
+            System.out.println("No Buses Exist");
+        }
+    }
+
+    public void addBus() {
+        if (Driver.driverCount > 0) {
             System.out.println("Where will bus Travel to");
-            this.TravellingTo = sc.nextLine();
+            this.travellingTo = sc.nextLine();
             System.out.println("Where will bus Travel From");
-            this.TravellingFrom = sc.nextLine();
-
+            this.travellingFrom = sc.nextLine();
             System.out.println("What City bus is this Type in 3 letters");
             String city;
-
             do {
                 city = sc.nextLine();
-
             } while (city.length() != 3);
-
             System.out.println("What will be the Number of Number Plate");
             String noplate = sc.nextLine();
-
-            this.NoPlate = city + noplate;
-
+            this.noPlate = city + noplate;
+        } else {
+            System.out.println("At least One Driver Should Exist");
         }
-        else{
-            System.out.println("Atleast One Driver Should Exsits");
-        }
-
     }
-    public static void assignDriverToBus(ArrayList<Bus> buses , ArrayList<Driver> drivers){
-        if (!( buses.isEmpty() ) && !( drivers.isEmpty())) {
+
+    public static void assignDriverToBus(ArrayList<Bus> buses, ArrayList<Driver> drivers) {
+        if (!(buses.isEmpty()) && !(drivers.isEmpty())) {
             try {
-
-                for (Bus i : buses) {
-
+                for (Bus bus : buses) {
                     System.out.println("Please Select From following Buses");
-                    System.out.println("No Plate: " + i.NoPlate);
-
+                    System.out.println("No Plate: " + bus.noPlate);
                 }
                 System.out.println("Write your selection for Number Plate");
-                String user_choice_NoPlate = sc.nextLine();
-
-                for (Driver i : drivers) {
-
+                String userChoiceNoPlate = sc.nextLine();
+                for (Driver driver : drivers) {
                     System.out.println("Please Select From following Drivers");
-                    System.out.println("Driver Name: " + i.getName());
-
+                    System.out.println("Driver Name: " + driver.getName());
                 }
                 System.out.println("Write your selection for Driver");
-                String user_choice_DriverName = sc.nextLine();
-
-                boolean nameExsits = false;
+                String userChoiceDriverName = sc.nextLine();
+                boolean nameExists = false;
                 boolean noExists = false;
-                for (Bus i : buses) {
-
-                    if (user_choice_NoPlate.equalsIgnoreCase(i.NoPlate)) ;
+                for (Bus bus : buses) {
+                    if (userChoiceNoPlate.equalsIgnoreCase(bus.noPlate)) ;
                     noExists = true;
                     break;
                 }
-                for (Driver i : drivers) {
-
-                    if (user_choice_DriverName.equalsIgnoreCase(i.getName())) ;
-                    nameExsits = true;
+                for (Driver driver : drivers) {
+                    if (userChoiceDriverName.equalsIgnoreCase(driver.getName())) ;
+                    nameExists = true;
                     break;
                 }
+                if (noExists && nameExists) {
+                    for (Driver driver : drivers) {
+                        for (Bus bus : buses) {
+                            if (userChoiceDriverName.equalsIgnoreCase(driver.getName()) && userChoiceNoPlate.equalsIgnoreCase(bus.noPlate)) {
+                                bus.setDriver(driver);
+                                bus.driverAssign = true;
+                                driver.busesAssigned.add(bus);
 
-                if (noExists && nameExsits) {
-                    for (Driver i : drivers) {
-                        for (Bus j : buses) {
-                            if (user_choice_DriverName.equalsIgnoreCase(i.getName()) && user_choice_NoPlate.equalsIgnoreCase(j.NoPlate))
-                                i.busesAssigned.add(j);
-                            break;
+                                break;
+                            }
                         }
                     }
                 }
-
-            }catch(Exception exp){
-                System.out.println("Driver or Bus dont exsits");
+            } catch (Exception exp) {
+                System.out.println("Driver or Bus doesn't exist");
             }
-        }else{
-            System.out.println("No Buses Or Drivers Avaliable");
+        } else {
+            System.out.println("No Buses Or Drivers Available");
         }
-
-
-
     }
-
-
-
 }
