@@ -25,6 +25,7 @@ public class Main {
             switch (userChoiceMenu) {
                 case 1:
                     System.out.println("1. Add Ticket");
+                    System.out.println("2.View All tickets");
                     int userChoiceTicket = scanner.nextInt();
                     if (userChoiceTicket == 1) {
                         tickets.add(new Ticket());
@@ -32,6 +33,7 @@ public class Main {
                         ticketCount++;
                     }
                     if(userChoiceTicket == 2){
+
                         Ticket.printAllTickets(tickets);
                     }
                     break;
