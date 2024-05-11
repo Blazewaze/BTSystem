@@ -31,6 +31,9 @@ public class Main {
                         tickets.get(ticketCount).ticketGenerator(buses);
                         ticketCount++;
                     }
+                    if(userChoiceTicket == 2){
+                        Ticket.printAllTickets(tickets);
+                    }
                     break;
                 case 2:
                     System.out.println("1. Add a Bus");
